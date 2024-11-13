@@ -1,0 +1,22 @@
+#+TITLE:     digclo
+#+SUBTITLE:  clojure dns library
+#+KEYWORDS:  clojure, dns
+#+LANGUAGE:  en
+
+simple dns library for clojure
+
+* installation
+** Leiningen
+#+BEGIN_SRC clojure
+[digclo "0.1.0-SNAPSHOT"]
+#+END_SRC
+
+* building
+from the root of the project, run:
+
+#+begin_src sh
+lein install
+#+end_src
+
+* license
+digclo is licensed under the Apache License, v2.
