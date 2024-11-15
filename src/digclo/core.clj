@@ -6,7 +6,7 @@
   (:import
    (java.net Inet4Address Inet6Address InetAddress)
    (java.util.function BiConsumer)
-   (org.xbill.DNS ARecord DClass EmptyRecord Message Name OPTRecord Record Section SimpleResolver SOARecord TXTRecord)))
+   (org.xbill.DNS ARecord DClass EmptyRecord Message Name NSRecord OPTRecord Record Section SimpleResolver SOARecord TXTRecord)))
 
 ;; useful links
 ;; https://www.ietf.org/rfc/rfc1034.txt
@@ -36,7 +36,7 @@
    :type            (-> obj .getType record-type-id->kw)
    :ttl             (-> obj .getTTL)
    :rr-set-type     (-> obj .getRRsetType)
-   :additional-name (-> obj .getAdditionalName)})
+   :additional-name (-> obj .getAdditionalName j/from-java)})
 
 (defmethod j/from-java OPTRecord [obj]
   (merge (format-record obj)
@@ -66,6 +66,10 @@
 (defmethod j/from-java TXTRecord [obj]
   (merge (format-record obj)
          {:strings (-> obj .getStrings)}))
+
+(defmethod j/from-java NSRecord [obj]
+  (merge (format-record obj)
+         {:target (-> obj .getTarget j/from-java)}))
 
 (defmethod j/from-java Name [obj]
   (str obj))
