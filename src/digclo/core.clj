@@ -6,7 +6,7 @@
   (:import
    (java.net Inet4Address Inet6Address InetAddress)
    (java.util.function BiConsumer)
-   (org.xbill.DNS ARecord DClass EmptyRecord Message Name OPTRecord Record Section SimpleResolver SOARecord)))
+   (org.xbill.DNS ARecord DClass EmptyRecord Message Name OPTRecord Record Section SimpleResolver SOARecord TXTRecord)))
 
 ;; useful links
 ;; https://www.ietf.org/rfc/rfc1034.txt
@@ -62,6 +62,10 @@
           :retry   (-> obj .getRetry)
           :expire  (-> obj .getExpire)
           :minimum (-> obj .getMinimum)}))
+
+(defmethod j/from-java TXTRecord [obj]
+  (merge (format-record obj)
+         {:strings (-> obj .getStrings)}))
 
 (defmethod j/from-java Name [obj]
   (str obj))
