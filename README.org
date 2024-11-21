@@ -18,5 +18,50 @@ from the root of the project, run:
 lein install
 #+end_src
 
+* usage
+lookup can be used with optional dns server argument
+#+BEGIN_SRC clojure
+(:require [digclo.core :refer [lookup]])
+
+(lookup "google.com" :server "8.8.8.8)
+#+END_SRC
+
+* output
+
+#+BEGIN_SRC clojure
+{:question
+ [{:name "google.com.",
+   :type :a,
+   :ttl 0,
+   :rr-set-type 1,
+   :additional-name nil}],
+ :answer
+ [{:name "google.com.",
+   :type :a,
+   :ttl 199,
+   :rr-set-type 1,
+   :additional-name nil,
+   :address "IP_ADDRESS"}
+  {:name "google.com.",
+   :type :a,
+   :ttl 199,
+   :rr-set-type 1,
+   :additional-name nil,
+   :address "IP_ADDRESS"}],
+ :authority [],
+ :additional
+ [{:name ".",
+   :extended-r-code 0,
+   :type :opt,
+   :additional-name nil,
+   :ttl 0,
+   :options [],
+   :version 0,
+   :flags 0,
+   :payload-size 512,
+   :rr-set-type 41}]}
+#+END_SRC
+
+
 * license
 digclo is licensed under the Apache License, v2.
